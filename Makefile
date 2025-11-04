@@ -2,18 +2,13 @@ NAME            = miniRT
 NAME_BONUS      = miniRT_bonus
 CC              = cc
 CFLAGS          = -Wall -Wextra -Werror -Ofast -O3 -ffast-math -march=native
-// Project root (directory where this Makefile resides). Makes paths cwd-independent.
-PROJECT_ROOT    := $(patsubst %/,%, $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
-
-CC              = cc
-CFLAGS          = -Wall -Wextra -Werror -Ofast -O3 -ffast-math -march=native
-INCLUDES        = -I $(PROJECT_ROOT)/include -I $(PROJECT_ROOT)/libraries/MLX42/include -I $(PROJECT_ROOT)/libraries/MLX42/include/MLX42 -I $(PROJECT_ROOT)/libraries/libft
-INCLUDES_BONUS  = $(INCLUDES) -I $(PROJECT_ROOT)/include_bonus
+INCLUDES        = -I include -I libraries/MLX42/include -I libraries/MLX42/include/MLX42 -I libraries/libft
+INCLUDES_BONUS  = $(INCLUDES) -I include_bonus
 LDFLAGS         = -ldl -lglfw -pthread -lm -lGL
 
-SRC_DIR_M       = $(PROJECT_ROOT)/src
-SRC_DIR_B       = $(PROJECT_ROOT)/src_bonus
-OBJ_ROOT        = $(PROJECT_ROOT)/obj
+SRC_DIR_M       = src
+SRC_DIR_B       = src_bonus
+OBJ_ROOT        = obj
 OBJ_DIR_M       = $(OBJ_ROOT)/mandatory
 OBJ_DIR_B       = $(OBJ_ROOT)/bonus
 
@@ -126,11 +121,11 @@ DEPS_M      = $(OBJS_M:.o=.d)
 DEPS_B      = $(OBJS_B:.o=.d)
 
 # Libraries
-LIBFT_DIR   = $(PROJECT_ROOT)/libraries/libft
+LIBFT_DIR   = libraries/libft
 LIBFT_LIB   = $(LIBFT_DIR)/libft.a
-GNL_DIR     = $(PROJECT_ROOT)/libraries/get_next_line
+GNL_DIR     = libraries/get_next_line
 GNL_LIB     = $(GNL_DIR)/get_next_line.a
-MLX_DIR     = $(PROJECT_ROOT)/libraries/MLX42
+MLX_DIR     = libraries/MLX42
 MLX_BUILD_DIR = $(MLX_DIR)/build
 MLX_LIB     = $(MLX_BUILD_DIR)/libmlx42.a
 
@@ -190,4 +185,3 @@ re:
 -include $(DEPS_B)
 
 .PHONY: all clean fclean re bonus
-
